@@ -1,0 +1,5 @@
+target/
+deboa/target/
+.vscode
+.DS_Store
+.samoyed

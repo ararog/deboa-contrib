@@ -1,0 +1,27 @@
+name: Code Coverage
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cover:
+    name: coverage
+    runs-on: ubuntu-latest
+    container:
+      image: xd009642/tarpaulin:develop-nightly
+      options: --security-opt seccomp=unconfined --hostname=localhost
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Generate code coverage
+        run: |
+          CARGO_INCREMENTAL=0 cargo +nightly tarpaulin --verbose --workspace --timeout 120 --engine llvm --out xml -- --test-threads 1
+
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          fail_ci_if_error: true
