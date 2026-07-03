@@ -31,7 +31,7 @@ jobs:
 
       - name: Install mold linker
         if: matrix.os == 'ubuntu-latest'
-        uses: rui314/setup-mold@v1   
+        uses: rui314/setup-mold@v1
 
       - name: Run all tests
         run: |
@@ -51,11 +51,11 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
+        uses: kunobi-ninja/kache-action@v1
 
       - name: Install mold linker
         if: matrix.os == 'ubuntu-latest'
-        uses: rui314/setup-mold@v1           
+        uses: rui314/setup-mold@v1
       - name: Run deboa-${{ matrix.runtime }} tests on ${{ matrix.os }} with ${{ matrix.protocol }} using ${{ matrix.tls }}
         if: (matrix.os != 'windows-latest' && matrix.tls != 'native-tls') || (matrix.os != 'macos-latest' && matrix.tls != 'native-tls')
         run: |
@@ -73,7 +73,7 @@ jobs:
         run: rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
 
       - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
+        uses: kunobi-ninja/kache-action@v1
 
       - name: Build for android archs with cargo-ndk
         run: |

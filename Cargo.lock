@@ -351,7 +351,7 @@ dependencies = [
 
 [[package]]
 name = "deboa-fory"
-version = "0.1.6-beta.1"
+version = "0.1.6-beta.2"
 dependencies = [
  "deboa",
  "fory",
