@@ -318,7 +318,7 @@ dependencies = [
 
 [[package]]
 name = "deboa-extras"
-version = "0.0.9-beta.12"
+version = "0.0.9-beta.13"
 dependencies = [
  "base64",
  "brotli",
@@ -351,7 +351,7 @@ dependencies = [
 
 [[package]]
 name = "deboa-fory"
-version = "0.1.6-beta.2"
+version = "0.1.6-beta.3"
 dependencies = [
  "deboa",
  "fory",
