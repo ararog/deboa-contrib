@@ -1,0 +1,39 @@
+[package]
+name = "deboa-hickory"
+version = "0.1.0"
+description = "Hickory DNS resolver for Deboa"
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[features]
+default = []
+dnssec-aws-lc-rs = ["hickory-resolver/dnssec-aws-lc-rs"]
+dnssec-ring = ["hickory-resolver/dnssec-ring"]
+h3-aws-lc-rs = ["hickory-resolver/h3-aws-lc-rs"]
+h3-ring = ["hickory-resolver/h3-ring"]
+quic-aws-lc-rs = ["hickory-resolver/quic-aws-lc-rs"]
+quic-ring = ["hickory-resolver/quic-ring"]
+system-hosts = []
+tls-aws-lc-rs = ["hickory-resolver/tls-aws-lc-rs"]
+tls-ring = ["hickory-resolver/tls-ring"]
+
+[dependencies]
+deboa = { workspace = true }
+hickory-resolver = "0.25.2"
+rand = { version = "0.10.2", default-features = false, features = [
+  "std",
+  "thread_rng",
+] }
+
+[dev-dependencies]
+deboa-extras.workspace = true
+deboa-tokio = "0.1.0-beta.7"
+http = "1.4.2"
+serde = "1.0.228"
+serde_json = "1.0.150"
+tokio = { version = "1.52.3", features = ["macros", "rt-multi-thread"] }

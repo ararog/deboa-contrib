@@ -4,7 +4,8 @@ resolver = "3"
 # Include both parts of the library in the workspace
 members = [
     "deboa-extras",
-    "deboa-fory"
+    "deboa-fory",
+    "deboa-hickory"
 ]
 
 [workspace.package]
