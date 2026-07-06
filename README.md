@@ -1,12 +1,6 @@
 # Deboa Contrib
 
-## Description
-
 **deboa-contrib** contains crates with additional functionality for the deboa HTTP client.
-
-## Attention
-
-This release has a major api change. Please check the [migration guide](https://github.com/ararog/deboa/blob/main/MIGRATION_GUIDE.md) for more information. Keep in mind API for prior to 0.1.0 is subject to change. Proper deprecation will be added in the next stable release.
 
 ## Install
 
@@ -48,6 +42,10 @@ async fn main() -> Result<()> {
 
 Pluggable compression/decompression, serializers, sse, websockets and catchers.
 All of them are optional. This is the place to contribute with your own pluggable features.
+
+### [deboa-fory](https://github.com/ararog/deboa/tree/develop/deboa-fory)
+
+Data encoding and decoding using Apache Fory.
 
 ## License
 

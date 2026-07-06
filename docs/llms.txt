@@ -1,0 +1,55 @@
+# Deboa-Contrib
+
+> **Deboa-Contrib** is a collection of extension crates for Deboa.
+It offers a rich array of modern features—from flexible authentication and serialization formats.
+
+## Installation
+
+```toml
+[dependencies]
+deboa_extras = "0.1.0"
+deboa_fory = "0.1.0"
+```
+
+## Quickstart
+
+```rust
+use deboa::{Client, request::get, Result};
+use deboa_extras::http::serde::json::JsonBody;
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Post {
+    id: u64,
+    title: String,
+    body: String,
+}
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    let client = Client::new();
+
+    let posts: Vec<Post> = get("https://jsonplaceholder.typicode.com/posts")
+        .send_with(&client)
+        .await?
+        .body_as(JsonBody, Post)?;
+
+    println!("First post: {}", posts[0].title);
+    Ok(())
+}
+```
+
+## Features
+
+- SSE support
+- Multiple serialization formats (JSON, XML, MessagePack, YAML, Fory, CBOR)
+
+## Crates
+
+- [deboa_extras](https://crates.io/crates/deboa_extras)
+- [deboa_fory](https://crates.io/crates/deboa_fory)
+
+## Blog Posts
+
+- [Real-time Communication with WebSockets using deboa-extras](https://dev.to/rogrio_arajo_55dae16f0d/real-time-communication-with-websockets-using-deboa-extras-172o)
+- [🚀 Level Up Your HTTP Requests: Exploring deboa-extras (Rust Crate)](https://medium.com/@ararog/level-up-your-http-requests-exploring-deboa-extras-rust-crate-56e2a64d1186)
