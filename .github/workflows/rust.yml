@@ -1,4 +1,4 @@
-name: Deboa Unit Tests
+name: Deboa Contrib Unit Tests
 
 permissions:
   contents: read
@@ -28,10 +28,6 @@ jobs:
 
       - name: Install nextest
         uses: taiki-e/install-action@nextest
-
-      - name: Install mold linker
-        if: matrix.os == 'ubuntu-latest'
-        uses: rui314/setup-mold@v1
 
       - name: Run all tests
         run: |
