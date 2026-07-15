@@ -24,7 +24,7 @@ tls-ring = ["hickory-resolver/tls-ring"]
 
 [dependencies]
 deboa = { workspace = true }
-hickory-resolver = "0.25.2"
+hickory-resolver = "0.26.0"
 rand = { version = "0.10.2", default-features = false, features = [
   "std",
   "thread_rng",
