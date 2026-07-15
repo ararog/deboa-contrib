@@ -1084,9 +1084,9 @@ dependencies = [
 
 [[package]]
 name = "hyper-body-utils"
-version = "0.1.7"
+version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6119ecb58bafa9e02715d3ad46be58c769065082e8bf92291cc8a6e1dabc01ca"
+checksum = "75020e6f5bca49269aa84a3b6fb90465374979828597423122ad7f7d4f55f0d7"
 dependencies = [
  "bytes",
  "futures",
@@ -2283,7 +2283,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "52d1cfed4120b4d927bf7c0f86d2087a4a7d6027c906d9f9d525a80573b9be51"
 dependencies = [
  "libc",
- "windows-sys 0.61.2",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
@@ -2819,7 +2819,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.61.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
