@@ -346,17 +346,15 @@ checksum = "a4ae5f15dda3c708c0ade84bfee31ccab44a3da4f88015ed22f63732abe300c8"
 
 [[package]]
 name = "deboa"
-version = "0.1.0-beta.20"
+version = "0.1.0-beta.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09dc5a5e5acadeac46f927c22f402de69904e3e6f6e9f596f496825836777afa"
+checksum = "5411b434206f401b72f4561fd94042a903ca3bae25ec279f2e492dee6e3ed3cf"
 dependencies = [
  "async-trait",
  "base64",
  "bytes",
  "cookie",
  "futures",
- "h3",
- "h3-quinn",
  "http",
  "http-body",
  "http-body-util",
@@ -378,7 +376,7 @@ dependencies = [
 
 [[package]]
 name = "deboa-extras"
-version = "0.0.9-beta.13"
+version = "0.0.9-beta.15"
 dependencies = [
  "base64",
  "brotli",
@@ -408,33 +406,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "deboa-extras"
-version = "0.0.9-beta.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b603ec82ce178e451c497e78bbda40cb532e378cfe54f36a6af0151cf530e166"
-dependencies = [
- "bytes",
- "deboa",
- "futures",
- "futures-util",
- "http",
- "http-body-util",
- "hyper",
- "hyper-body-utils",
- "mime",
- "mime_typed",
- "pin-project-lite",
- "rmp-serde",
- "serde",
- "serde-xml-rust",
- "simd-json",
- "thiserror 2.0.18",
- "url",
-]
-
-[[package]]
 name = "deboa-fory"
-version = "0.1.6-beta.3"
+version = "0.1.6-beta.5"
 dependencies = [
  "deboa",
  "fory",
@@ -447,7 +420,7 @@ name = "deboa-hickory"
 version = "0.1.0"
 dependencies = [
  "deboa",
- "deboa-extras 0.0.9-beta.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "deboa-extras",
  "deboa-tokio",
  "hickory-resolver",
  "http",
@@ -1083,12 +1056,13 @@ dependencies = [
 
 [[package]]
 name = "hyper-body-utils"
-version = "0.1.8"
+version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75020e6f5bca49269aa84a3b6fb90465374979828597423122ad7f7d4f55f0d7"
+checksum = "3bbcedb0160531e4026eaa915976bb1f86f724ac71e8a7df94e78679004a97a0"
 dependencies = [
  "bytes",
  "futures",
+ "http",
  "http-body-util",
  "hyper",
 ]

@@ -45,7 +45,7 @@ pub trait ForyResponse {
     fn body_as_fory<T: Serializer + std::fmt::Debug + ForyDefault>(
         self,
         fory: &Fory,
-    ) -> impl std::future::Future<Output = Result<T>> + Send;
+    ) -> impl std::future::Future<Output = Result<T>>;
 }
 
 impl ForyResponse for DeboaResponse {

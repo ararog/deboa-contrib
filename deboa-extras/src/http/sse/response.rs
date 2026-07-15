@@ -38,11 +38,8 @@ impl IntoEventStream for DeboaResponse {
         }
 
         let header = header.unwrap();
-
         let message = "Content type is not text/event-stream".to_string();
-
         let header = header.to_str();
-
         if let Err(_error) = header {
             return Err(DeboaError::Header { message });
         }
