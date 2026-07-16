@@ -1,9 +1,12 @@
 use deboa::{
     dns::{DnsResolver, DnsResolverFuture},
-    errors::{DeboaError::Dns, DnsError},
+    errors::{
+        DeboaError::{self, Dns},
+        DnsError,
+    },
 };
 use hickory_resolver::{
-    config::ResolverConfig, name_server::TokioConnectionProvider, Hosts, Resolver,
+    config::ResolverConfig, net::runtime::TokioRuntimeProvider, Hosts, Resolver,
 };
 use rand::seq::SliceRandom;
 
@@ -12,13 +15,16 @@ pub struct HickoryDnsResolver;
 
 impl DnsResolver for HickoryDnsResolver {
     fn resolve(&self, host: String, _port: u16) -> DnsResolverFuture {
-        let mut resolver = Resolver::builder_with_config(
-            ResolverConfig::default(),
-            TokioConnectionProvider::default(),
-        )
-        .build();
-
         let future = async move {
+            let mut resolver = Resolver::builder_with_config(
+                ResolverConfig::default(),
+                TokioRuntimeProvider::default(),
+            )
+            .build()
+            .map_err(|e| {
+                DeboaError::Dns(DnsError::Resolve { host: host.clone(), message: e.to_string() })
+            })?;
+
             if let Ok(hosts) = Hosts::from_system() {
                 resolver.set_hosts(hosts.into());
             }
@@ -32,7 +38,7 @@ impl DnsResolver for HickoryDnsResolver {
 
             let mut ips = addrs
                 .unwrap()
-                .into_iter()
+                .iter()
                 .collect::<Vec<_>>();
             ips.shuffle(&mut rand::rng());
             Ok(ips)
