@@ -337,9 +337,9 @@ checksum = "a4ae5f15dda3c708c0ade84bfee31ccab44a3da4f88015ed22f63732abe300c8"
 
 [[package]]
 name = "deboa"
-version = "0.1.0-beta.23"
+version = "0.1.0-beta.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a417624519eeb9962415b091c0444ff85f2df7556318b3bff347ac7c5d1eb960"
+checksum = "617aa0908ecdf6b29a7b3e379195fc779b4d485937e71aaa997f4d19c9c991d3"
 dependencies = [
  "async-trait",
  "base64",
