@@ -423,9 +423,9 @@ dependencies = [
 
 [[package]]
 name = "deboa-tokio"
-version = "0.1.0-beta.11"
+version = "0.1.0-beta.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b825bf78d4d53d3863360d1dcf44ba14024db57be6cd650a2a2036cb0c2166bc"
+checksum = "2e8460dce7128eb16245ef967f5a2465f4636da3fa1e16434d53686f31a41f02"
 dependencies = [
  "async-trait",
  "base64",
