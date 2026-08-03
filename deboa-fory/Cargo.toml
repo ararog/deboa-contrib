@@ -1,6 +1,6 @@
 [package]
 name = "deboa-fory"
-version = "0.1.6-beta.5"
+version = "0.1.6"
 edition.workspace = true
 authors.workspace = true
 repository.workspace = true
@@ -17,6 +17,6 @@ default = []
 
 [dependencies]
 deboa = { workspace = true, default-features = false }
-fory = "1.1.0"
-fory-core = "1.1.0"
+fory = "1.5.0"
+fory-core = "1.5.0"
 http = "1.4.2"

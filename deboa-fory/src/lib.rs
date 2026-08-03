@@ -6,7 +6,7 @@ use deboa::{
     response::DeboaResponse,
     Result,
 };
-use fory::{Fory, ForyDefault, Serializer};
+use fory::{Fory, Serializer};
 use http::header;
 
 //#[cfg(test)]
@@ -15,11 +15,19 @@ use http::header;
 /// Fory request builder extension
 pub trait ForyRequestBuilder {
     /// Set the request body as Fory
-    fn body_as_fory<T: Serializer>(self, fory: &Fory, body: T) -> Result<DeboaRequestBuilder>;
+    fn body_as_fory<T: Serializer<Target = T>>(
+        self,
+        fory: &Fory,
+        body: T,
+    ) -> Result<DeboaRequestBuilder>;
 }
 
 impl ForyRequestBuilder for DeboaRequestBuilder {
-    fn body_as_fory<T: Serializer>(self, fory: &Fory, body: T) -> Result<DeboaRequestBuilder> {
+    fn body_as_fory<T: Serializer<Target = T>>(
+        self,
+        fory: &Fory,
+        body: T,
+    ) -> Result<DeboaRequestBuilder> {
         let result = fory.serialize(&body);
         let Ok(data) = result else {
             return Err(DeboaError::Content(ContentError::Serialization {
@@ -42,14 +50,14 @@ impl ForyRequestBuilder for DeboaRequestBuilder {
 /// Fory response extension
 pub trait ForyResponse {
     /// Get the response body as Fory
-    fn body_as_fory<T: Serializer + std::fmt::Debug + ForyDefault>(
+    fn body_as_fory<T: Serializer<Target = T> + std::fmt::Debug>(
         self,
         fory: &Fory,
     ) -> impl std::future::Future<Output = Result<T>>;
 }
 
 impl ForyResponse for DeboaResponse {
-    async fn body_as_fory<T: Serializer + std::fmt::Debug + ForyDefault>(
+    async fn body_as_fory<T: Serializer<Target = T> + std::fmt::Debug>(
         self,
         fory: &Fory,
     ) -> Result<T> {

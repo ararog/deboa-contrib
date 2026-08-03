@@ -1,20 +1,21 @@
 use deboa::request::get;
 use deboa_extras::serde::json::JsonBody;
-use deboa_tokio::Client;
+use deboa_hickory::HickoryDnsResolver;
+use deboa_tokio::CustomClient;
 use http::header;
 
 #[derive(serde::Deserialize, Debug)]
 struct Post {
-    id: u32,
-    title: String,
-    body: String,
+    pub id: u32,
+    pub title: String,
+    pub body: String,
 }
 
 #[tokio::test]
 async fn test_lookup() -> Result<(), Box<dyn std::error::Error>> {
     // Create a new Client instance, set timeouts, catches and protocol.
-    let dns_resolver = deboa_hickory::HickoryDnsResolver;
-    let client = Client::builder()
+    let dns_resolver = HickoryDnsResolver;
+    let client = CustomClient::<HickoryDnsResolver>::builder()
         .dns_resolver(dns_resolver)
         .build();
 
