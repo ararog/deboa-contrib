@@ -116,12 +116,6 @@ dependencies = [
 
 [[package]]
 name = "base64"
-version = "0.22.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
-
-[[package]]
-name = "base64"
 version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b25655df2c3cdd83c5e5b293b88acd880332b2ddadd7c30ac43144fdc0033da9"
@@ -368,7 +362,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0420e86eca809d1efbf009ae21aec08ffb0e9c20051beeac6b100d954929ef1b"
 dependencies = [
  "async-lock",
- "base64 0.23.0",
+ "base64",
  "bytes",
  "cookie",
  "futures",
@@ -395,7 +389,7 @@ dependencies = [
 name = "deboa-extras"
 version = "0.0.9"
 dependencies = [
- "base64 0.23.0",
+ "base64",
  "brotli",
  "bytes",
  "ciborium",
@@ -451,9 +445,11 @@ dependencies = [
 [[package]]
 name = "deboa-tokio"
 version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "60ab24285cccf22cb5e08d6bdbaab1cb0a6c44e5ef7dabe6a69cd47278d6ce97"
 dependencies = [
  "async-lock",
- "base64 0.23.0",
+ "base64",
  "bytes",
  "cookie",
  "deboa",
@@ -2159,7 +2155,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5bb49c0aa8a5bb88c00b833c11bae50d1611fb89e01336f53b05f7c643b1c883"
 dependencies = [
  "annotate-snippets",
- "base64 0.23.0",
+ "base64",
  "encoding_rs_io",
  "granit-parser",
  "nohash-hasher",
