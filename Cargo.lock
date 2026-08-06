@@ -357,15 +357,16 @@ checksum = "a4ae5f15dda3c708c0ade84bfee31ccab44a3da4f88015ed22f63732abe300c8"
 
 [[package]]
 name = "deboa"
-version = "0.1.0"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0420e86eca809d1efbf009ae21aec08ffb0e9c20051beeac6b100d954929ef1b"
+checksum = "fb779f386cdce549cd46db06617040fef67f4f9e57ee2f6fe01557fdf7280a8f"
 dependencies = [
  "async-lock",
  "base64",
  "bytes",
  "cookie",
  "futures",
+ "hashbrown 0.17.1",
  "http",
  "http-body",
  "http-body-util",
@@ -444,9 +445,9 @@ dependencies = [
 
 [[package]]
 name = "deboa-tokio"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60ab24285cccf22cb5e08d6bdbaab1cb0a6c44e5ef7dabe6a69cd47278d6ce97"
+checksum = "633bb0218b77c871452a5cece79cb4549b8016489658fa4b15e60d5235847bcd"
 dependencies = [
  "async-lock",
  "base64",
@@ -455,6 +456,7 @@ dependencies = [
  "deboa",
  "futures",
  "futures-rustls",
+ "hashbrown 0.17.1",
  "http",
  "http-body",
  "http-body-util",
@@ -923,6 +925,11 @@ name = "hashbrown"
 version = "0.17.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
+dependencies = [
+ "allocator-api2",
+ "equivalent",
+ "foldhash",
+]
 
 [[package]]
 name = "hickory-net"
