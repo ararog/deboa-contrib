@@ -14,7 +14,7 @@ struct Post {
 #[tokio::test]
 async fn test_lookup() -> Result<(), Box<dyn std::error::Error>> {
     // Create a new Client instance, set timeouts, catches and protocol.
-    let dns_resolver = HickoryDnsResolver;
+    let dns_resolver = HickoryDnsResolver::default();
     let client = CustomClient::<HickoryDnsResolver>::builder()
         .dns_resolver(dns_resolver)
         .build();

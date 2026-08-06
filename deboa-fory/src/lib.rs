@@ -61,7 +61,7 @@ impl ForyResponse for DeboaResponse {
         self,
         fory: &Fory,
     ) -> Result<T> {
-        let result = fory.deserialize(&self.bytes().await);
+        let result = fory.deserialize(&self.bytes().await?);
         let Ok(data) = result else {
             return Err(DeboaError::Content(ContentError::Deserialization {
                 message: result
