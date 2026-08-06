@@ -2,6 +2,9 @@
 #![deny(missing_docs)]
 /// Errors module
 pub mod errors;
+/// Hook module
+#[cfg(feature = "hooks")]
+pub mod hook;
 /// HTTP module
 pub mod http;
 /// Serde module

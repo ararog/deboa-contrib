@@ -1,3 +1,4 @@
+#![allow(unused)]
 use deboa::request::get;
 use deboa_extras::serde::json::JsonBody;
 use deboa_hickory::HickoryDnsResolver;
