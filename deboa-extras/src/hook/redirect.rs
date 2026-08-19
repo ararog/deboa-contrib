@@ -28,6 +28,8 @@ use deboa::{
     response::DeboaResponse,
     Result,
 };
+use http::{StatusCode, Uri};
+use hyper_body_utils::HttpBody;
 use tackle::{Chain, Hook};
 
 /// A hook that redirects requests to another hook.
@@ -54,13 +56,20 @@ where
     type Error = DeboaError;
 
     async fn call(&self, input: DeboaRequest) -> Self::Result {
-        let mut request = input;
+        let request = input;
         let mut redirect_count = 0;
+        let (parts, body) = request.into_parts();
+        let parts_clone = parts.clone();
+        let body_clone = body
+            .try_clone()
+            .unwrap_or_else(|_v| HttpBody::empty());
+
+        let mut original_request = DeboaRequest::from_parts(parts_clone, body_clone)?;
 
         loop {
             let result = self
                 .inner
-                .call(request)
+                .call(original_request)
                 .await?;
 
             if result
@@ -70,7 +79,7 @@ where
                 // Check if we should redirect
                 if let Some(location) = result
                     .headers()
-                    .get("Location")
+                    .get(http::header::LOCATION)
                 {
                     if redirect_count >= self.limit {
                         return Err(DeboaError::Request(RequestError::Send {
@@ -84,12 +93,22 @@ where
                             message: "Invalid location header".to_string(),
                         })?;
 
-                    // Create a new request with the redirected URL, deconstructing the previous one
-                    request = DeboaRequest::at(location_str, http::Method::GET)
+                    let mut next_parts = parts.clone();
+                    let next_body = if result.status() == StatusCode::PERMANENT_REDIRECT
+                        || result.status() == StatusCode::TEMPORARY_REDIRECT
+                    {
+                        body.try_clone()
+                            .unwrap_or_else(|_v| HttpBody::empty())
+                    } else {
+                        HttpBody::empty()
+                    };
+
+                    next_parts.uri = location_str
+                        .parse::<Uri>()
                         .map_err(|e| {
-                            DeboaError::Request(RequestError::Parse { message: e.to_string() })
-                        })?
-                        .build()?;
+                            DeboaError::Request(RequestError::UrlParse { message: e.to_string() })
+                        })?;
+                    original_request = DeboaRequest::from_parts(next_parts, next_body)?;
                     redirect_count += 1;
                 } else {
                     return Ok(result);

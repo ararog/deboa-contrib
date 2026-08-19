@@ -3,7 +3,27 @@ use deboa::request::get;
 use deboa_extras::serde::json::JsonBody;
 use deboa_hickory::HickoryDnsResolver;
 use deboa_tokio::CustomClient;
+use hickory_resolver::{
+    config::{ResolverConfig, ResolverOpts, GOOGLE},
+    net::runtime::TokioRuntimeProvider,
+    Hosts, TokioResolver,
+};
 use http::header;
+use once_cell::sync::Lazy;
+use std::sync::Arc;
+
+static GLOBAL_RESOLVER: Lazy<Arc<TokioResolver>> = Lazy::new(|| {
+    let mut resolver = TokioResolver::builder_with_config(
+        ResolverConfig::udp_and_tcp(&GOOGLE),
+        TokioRuntimeProvider::default(),
+    )
+    .build()
+    .expect("Failed to create Hickory resolver");
+
+    resolver.set_hosts(Hosts::default().into());
+
+    Arc::new(resolver)
+});
 
 #[derive(serde::Deserialize, Debug)]
 struct Post {
@@ -15,8 +35,8 @@ struct Post {
 #[tokio::test]
 async fn test_lookup() -> Result<(), Box<dyn std::error::Error>> {
     // Create a new Client instance, set timeouts, catches and protocol.
-    let dns_resolver = HickoryDnsResolver::default();
-    let client = CustomClient::<HickoryDnsResolver>::builder()
+    let dns_resolver = HickoryDnsResolver::new(GLOBAL_RESOLVER.clone());
+    let client = CustomClient::<HickoryDnsResolver<TokioRuntimeProvider>>::builder()
         .dns_resolver(dns_resolver)
         .build();
 

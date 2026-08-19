@@ -18,10 +18,11 @@ license = "MIT OR Apache-2.0"
 rust-version = "1.85.0"
 
 [workspace.dependencies]
-deboa = { version = ">= 0.1.0" }
+#deboa = { path = "../deboa/deboa", version = ">= 0.1.0" }
+deboa = { path = "../deboa/deboa" }
 deboa-extras = { path = "deboa-extras" }
 deboa-fory = { path = "deboa-fory" }
-hyper-body-utils = { version = "0.1.9" }
+hyper-body-utils = { version = "^0.1.14" }
 
 [profile.test]
 lto = false
