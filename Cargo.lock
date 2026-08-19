@@ -598,34 +598,6 @@ checksum = "4583a4551df46e2792f82ceeac45e850d2e2d5debba0b91f102385cda5b11f06"
 [[package]]
 name = "deboa"
 version = "0.1.3"
-dependencies = [
- "async-lock",
- "base64",
- "bytes",
- "cookie",
- "futures",
- "hashbrown 0.17.1",
- "http",
- "http-body",
- "http-body-util",
- "hyper",
- "hyper-body-utils",
- "hyper-util",
- "indexmap",
- "log",
- "minimime",
- "rand",
- "regex",
- "serde",
- "tackle",
- "thiserror 2.0.20",
- "url",
- "urlencoding",
-]
-
-[[package]]
-name = "deboa"
-version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "65089863049f2a5af354ebb36b9213f299b42d04c178962d273944154b5e4a04"
 dependencies = [
@@ -662,7 +634,7 @@ dependencies = [
  "bytes",
  "caramelo",
  "ciborium",
- "deboa 0.1.3",
+ "deboa",
  "deboa-tokio",
  "env_logger",
  "flate2",
@@ -694,7 +666,7 @@ dependencies = [
 name = "deboa-fory"
 version = "0.1.7"
 dependencies = [
- "deboa 0.1.3",
+ "deboa",
  "fory",
  "fory-core",
  "http",
@@ -704,7 +676,7 @@ dependencies = [
 name = "deboa-hickory"
 version = "0.1.1"
 dependencies = [
- "deboa 0.1.3",
+ "deboa",
  "deboa-extras",
  "deboa-tokio",
  "hickory-resolver",
@@ -719,12 +691,14 @@ dependencies = [
 [[package]]
 name = "deboa-tokio"
 version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "31b194c6676f41348a57a468b0ac429a2b120c39d95af3527c44bfe7280438a3"
 dependencies = [
  "async-lock",
  "base64",
  "bytes",
  "cookie",
- "deboa 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "deboa",
  "hashbrown 0.17.1",
  "http",
  "http-body",
