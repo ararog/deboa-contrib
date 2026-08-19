@@ -1,40 +1,51 @@
 use deboa::{
     dns::{DnsResolver, DnsResolverFuture},
     errors::{DeboaError::Dns, DnsError},
-    Result,
 };
-use hickory_resolver::{
-    config::{ResolverConfig, GOOGLE},
-    net::runtime::TokioRuntimeProvider,
-    ResolverBuilder, TokioResolver,
-};
-use once_cell::sync::Lazy;
+use hickory_resolver::{net::runtime::RuntimeProvider, Resolver};
 use rand::seq::SliceRandom;
 use std::{net::IpAddr, sync::Arc};
 
-static GLOBAL_RESOLVER: Lazy<Arc<TokioResolver>> = Lazy::new(|| {
-    let resolver = TokioResolver::builder_with_config(
-        ResolverConfig::udp_and_tcp(&GOOGLE),
-        TokioRuntimeProvider::default(),
-    )
-    .build()
-    .expect("Failed to create Hickory resolver");
-    Arc::new(resolver)
-});
+pub struct HickoryDnsResolver<P>
+where
+    P: RuntimeProvider,
+{
+    resolver: Arc<Resolver<P>>,
+}
 
-#[derive(Default)]
-pub struct HickoryDnsResolver;
-
-impl HickoryDnsResolver {
-    pub fn builder() -> Result<ResolverBuilder<TokioRuntimeProvider>> {
-        TokioResolver::builder_tokio()
-            .map_err(|e| Dns(DnsError::Resolver { message: e.to_string() }))
+impl<P> HickoryDnsResolver<P>
+where
+    P: RuntimeProvider,
+{
+    pub fn new(resolver: Arc<Resolver<P>>) -> Self {
+        Self { resolver }
     }
 }
 
-impl DnsResolver for HickoryDnsResolver {
+impl<P> Default for HickoryDnsResolver<P>
+where
+    P: RuntimeProvider + Default,
+{
+    fn default() -> Self {
+        Self {
+            resolver: Arc::new(
+                Resolver::builder(P::default())
+                    .expect("Could not create builder!")
+                    .build()
+                    .expect("Coult not build resolver!"),
+            ),
+        }
+    }
+}
+
+impl<P> DnsResolver for HickoryDnsResolver<P>
+where
+    P: RuntimeProvider,
+{
     fn resolve(&self, host: String, _port: u16) -> DnsResolverFuture {
-        let resolver = GLOBAL_RESOLVER.clone();
+        let resolver = self
+            .resolver
+            .clone();
         let future = async move {
             let mut ips: Vec<IpAddr> = {
                 let addrs = resolver
