@@ -52,7 +52,7 @@ sonic_json = ["dep:sonic-rs"]
 
 [dependencies]
 base64 = { version = "0.23.0", optional = true, default-features = false }
-brotli = { version = "8.0.3", optional = true, default-features = false }
+brotli = { version = "9.0.0", optional = true, default-features = false }
 bytes = { version = "1.11.1", optional = true, default-features = false }
 ciborium = { version = "0.2.2", optional = true, default-features = false }
 deboa = { workspace = true, optional = true, default-features = false }
