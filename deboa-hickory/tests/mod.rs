@@ -1,5 +1,5 @@
 #![allow(unused)]
-use deboa::request::get;
+use deboa::{dns::DnsResolver as _, request::get};
 use deboa_extras::serde::json::JsonBody;
 use deboa_hickory::HickoryDnsResolver;
 use deboa_tokio::CustomClient;
@@ -41,7 +41,7 @@ async fn test_lookup() -> Result<(), Box<dyn std::error::Error>> {
         .build();
 
     let posts: Vec<Post> = get("https://jsonplaceholder.typicode.com/posts")?
-        .header(header::CONTENT_TYPE, "application/json")
+        .header(header::CONTENT_TYPE, "application/json")?
         .send_with(&client)
         .await?
         .body_as(JsonBody)

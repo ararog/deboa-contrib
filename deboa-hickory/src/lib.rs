@@ -1,6 +1,10 @@
 use deboa::{
-    dns::{DnsResolver, DnsResolverFuture},
-    errors::{DeboaError::Dns, DnsError},
+    dns::DnsResolver,
+    errors::{
+        DeboaError::{self},
+        DnsError,
+    },
+    Result,
 };
 use hickory_resolver::{net::runtime::RuntimeProvider, Resolver};
 use rand::seq::SliceRandom;
@@ -42,30 +46,26 @@ impl<P> DnsResolver for HickoryDnsResolver<P>
 where
     P: RuntimeProvider,
 {
-    fn resolve(&self, host: String, _port: u16) -> DnsResolverFuture {
+    async fn resolve(&self, host: String, _port: u16) -> Result<Vec<IpAddr>> {
         let resolver = self
             .resolver
             .clone();
-        let future = async move {
-            let mut ips: Vec<IpAddr> = {
-                let addrs = resolver
-                    .lookup_ip(&host)
-                    .await;
-                if let Err(e) = addrs {
-                    return Err(Dns(DnsError::Resolve { host, message: e.to_string() }));
-                }
-
-                addrs
-                    .unwrap()
-                    .iter()
-                    .collect()
-            };
-
-            ips.shuffle(&mut rand::rng());
-
-            Ok(ips)
+        let Ok(addrs) = resolver
+            .lookup_ip(&host)
+            .await
+        else {
+            return Err(DeboaError::Dns(DnsError::Resolve {
+                host,
+                message: "Failed to resolve host".to_string(),
+            }));
         };
 
-        Box::pin(future)
+        let mut ips: Vec<IpAddr> = addrs
+            .iter()
+            .collect();
+
+        ips.shuffle(&mut rand::rng());
+
+        Ok(ips)
     }
 }

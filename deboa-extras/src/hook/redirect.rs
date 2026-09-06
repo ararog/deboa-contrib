@@ -75,6 +75,7 @@ where
             if result
                 .status()
                 .is_redirection()
+                && self.limit > 0
             {
                 // Check if we should redirect
                 if let Some(location) = result

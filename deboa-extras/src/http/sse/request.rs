@@ -33,7 +33,6 @@ pub trait ServerSentEventBuilder {
 
 impl ServerSentEventBuilder for DeboaRequestBuilder {
     fn sse<T: IntoUrl>(url: T) -> Result<DeboaRequestBuilder> {
-        Ok(DeboaRequest::at(url, Method::GET)?
-            .header(header::CONTENT_TYPE, TextEventStream::MIME_STR))
+        DeboaRequest::at(url, Method::GET)?.header(header::CONTENT_TYPE, TextEventStream::MIME_STR)
     }
 }

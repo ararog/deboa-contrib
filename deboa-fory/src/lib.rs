@@ -39,11 +39,8 @@ impl ForyRequestBuilder for DeboaRequestBuilder {
 
         println!("data: {:?}", data);
 
-        let builder = self
-            .bytes(&data)
-            .header(header::CONTENT_TYPE, "application/fory");
-
-        Ok(builder)
+        self.bytes(&data)
+            .header(header::CONTENT_TYPE, "application/fory")
     }
 }
 
