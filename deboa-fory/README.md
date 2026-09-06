@@ -1,5 +1,7 @@
 # deboa-fory
 
+[![Crates.io downloads](https://img.shields.io/crates/d/deboa-fory)](https://crates.io/crates/deboa-fory) [![crates.io](https://img.shields.io/crates/v/deboa-fory?style=flat-square)](https://crates.io/crates/deboa-fory) [![Build Status](https://github.com/deboa-client/deboa/actions/workflows/rust.yml/badge.svg?event=push)](https://github.com/deboa-client/deboa/actions/workflows/rust.yml) ![Crates.io MSRV](https://img.shields.io/crates/msrv/deboa-fory) [![Documentation](https://docs.rs/deboa-fory/badge.svg)](https://docs.rs/deboa-fory/latest/deboa-fory) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/deboa-client/deboa/blob/main/LICENSE.md)  ![Codecov](https://img.shields.io/codecov/c/github/deboa-client/deboa-fory)
+
 Apache Fory serializer support for Deboa
 
 ## Features
@@ -57,9 +59,9 @@ let response: Person = request
 Licensed under either of
 
 - Apache License, Version 2.0
-  (LICENSE-APACHE or https://www.apache.org/licenses/LICENSE-2.0)
+  (LICENSE-APACHE or <https://www.apache.org/licenses/LICENSE-2.0>)
 - MIT license
-  (LICENSE-MIT or https://opensource.org/licenses/MIT)
+  (LICENSE-MIT or <https://opensource.org/licenses/MIT>)
 
 at your option.
 
