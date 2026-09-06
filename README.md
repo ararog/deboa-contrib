@@ -38,12 +38,16 @@ async fn main() -> Result<()> {
 
 ## Subprojects
 
-### [deboa-extras](https://github.com/ararog/deboa/tree/develop/deboa-extras)
+### [deboa-extras](https://github.com/deboa-client/deboa-contrib/tree/main/deboa-extras)
 
 Pluggable compression/decompression, serializers, sse, websockets and catchers.
 All of them are optional. This is the place to contribute with your own pluggable features.
 
-### [deboa-fory](https://github.com/ararog/deboa/tree/develop/deboa-fory)
+### [deboa-fory](https://github.com/deboa-client/deboa-contrib/tree/main/deboa-fory)
+
+Data encoding and decoding using Apache Fory.
+
+### [deboa-hickory](https://github.com/deboa-client/deboa-contrib/tree/main/deboa-hickory)
 
 Data encoding and decoding using Apache Fory.
 
